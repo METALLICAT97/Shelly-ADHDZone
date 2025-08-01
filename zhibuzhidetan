@@ -1,0 +1,516 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>这个男的值不值得谈v1.0</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .notice {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #fff8dc;
+            border-radius: 5px;
+            border-left: 4px solid #ffd700;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .form-group label {
+            width: 200px;
+            font-weight: bold;
+        }
+        
+        .form-group input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        .form-group input[type="text"] {
+            width: 60px;
+            padding: 5px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        .weight-input {
+            width: 80px !important;
+        }
+        
+        .primary-weight {
+            background-color: #e8f4fd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        
+        .sub-items {
+            margin-left: 20px;
+        }
+        
+        .sub-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .sub-item label {
+            width: 180px;
+            margin-right: 10px;
+        }
+        
+        .explanation {
+            color: #666;
+            font-size: 12px;
+            margin-left: 10px;
+            flex: 1;
+        }
+        
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 30px auto;
+            width: 200px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        .result {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .result.excellent {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .result.good {
+            background-color: #cce7ff;
+            color: #004085;
+            border: 1px solid #b8daff;
+        }
+        
+        .result.pass {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .result.reject {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .score-display {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .reset-btn {
+            background-color: #6c757d;
+            width: 150px;
+            margin: 10px auto;
+        }
+        
+        .reset-btn:hover {
+            background-color: #545b62;
+        }
+        
+        .weight-warning {
+            color: #ff6b6b;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>这个男的值不值得谈</h1>
+        
+        <div class="notice">
+            填表须知：此表格为男友评级量表基础模板，其中的评价维度和权重可根据用户需求自定义。请注意设置权重时请确保相同颜色权重之和为1。该表格得分仅作为恋爱参考，不负任何法律责任。
+        </div>
+        
+        <!-- 评分输入区域 -->
+        <div class="section">
+            <div class="section-title">评分输入</div>
+            
+            <!-- 家境适配度 -->
+            <div class="dimension-section">
+                <div class="primary-weight">
+                    <div class="form-group">
+                        <label>家境适配度 (一级权重):</label>
+                        <input type="number" id="weight_家境适配度" class="weight-input" value="0.2" step="0.01" min="0" max="1">
+                    </div>
+                </div>
+                <div class="sub-items">
+                    <div class="sub-item">
+                        <label>经济稳定性 (1-5分):</label>
+                        <input type="number" id="score_家境适配度_经济稳定性" value="4" min="1" max="5">
+                        <span>二级权重:</span>
+                        <input type="number" id="subweight_家境适配度_经济稳定性" class="weight-input" value="0.6" step="0.01" min="0" max="1">
+                        <div class="explanation">1分（负债累累）-5分（收入稳定、无大额负债，能共同应对生活风险）</div>
+                    </div>
+                    <div class="sub-item">
+                        <label>家庭氛围与家风 (1-5分):</label>
+                        <input type="number" id="score_家境适配度_家庭氛围与家风" value="3" min="1" max="5">
+                        <span>二级权重:</span>
+                        <input type="number" id="subweight_家境适配度_家庭氛围与家风" class="weight-input" value="0.3" step="0.01" min="0" max="1">
+                        <div class="explanation">1分（矛盾频发、价值观冲突大）-5分（和睦、尊重、与自身家庭观念契合）</div>
+                    </div>
+                    <div class="sub-item">
+                        <label>对婚恋的支持度 (1-5分):</label>
+                        <input type="number" id="score_家境适配度_对婚恋的支持度" value="5" min="1" max="5">
+                        <span>二级权重:</span>
+                        <input type="number" id="subweight_家境适配度_对婚恋的支持度" class="weight-input" value="0.1" step="0.01" min="0" max="1">
+                        <div class="explanation">1 分（反对或过度干涉）-5 分（尊重双方选择、适度支持不越界）</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 人品基础 -->
+            <div class="dimension-section">
+                <div class="primary-weight">
+                    <div class="form-group">
+                        <label>人品基础 (一级权重):</label>
+                        <input type="number" id="weight_人品基础" class="weight-input" value="0.3" step="0.01" min="0" max="1">
+                    </div>
+                </div>
+                <div class="sub-items">
+                    <div class="sub-item">
+                        <label>责任心 (1-5分):</label>
+                        <input type="number" id="score_人品基础_责任心" value="5" min="1" max="5">
+                        <span>二级权重:</span>
+                        <input type="number" id="subweight_人品基础_责任心" class="weight-input" value="0.2" step="0.01" min="0" max="1">
+                        <div class="explanation">1 分（推诿逃避、无担当）-5 分（对工作、承诺、他人感受负责，言行一致）</div>
+                    </div>
+                    <div class="sub-item">
+                        <label>真诚度 (1-5分):</label>
+                        <input type="number" id="score_人品基础_真诚度" value="4" min="1" max="5">
+                        <span>二级权重:</span>
+                        <input type="number" id="subweight_人品基础_真诚度" class="weight-input" value="0.15" step="0.01" min="0" max="1">
+                        <div class="explanation">1 分（习惯性撒谎、隐瞒重要信息）-5 分（坦诚沟通、不欺骗、愿意暴露真实自我）</div>
+                    </div>
+                    <div class="sub-item">
+                        <label>情绪稳定性 (1-5分):</label>
+                        <input type="number" id="score_人品基础_情绪稳定性" value="3" min="1" max="5">
+                        <span>二级权重:</span>
+                        <input type="number" id="subweight_人品基础_情绪稳定性" class="weight-input" value="0.35" step="0.01" min="0" max="1">
+                        <div class="explanation">1 分（易怒、极端情绪失控）-5 分（平和处理矛盾、能自我调节情绪，不迁怒他人）</div>
+                    </div>
+                    <div class="sub-item">
+                        <label>同理心与包容度 (1-5分):</label>
+                        <input type="number" id="score_人品基础_同理心与包容度" value="4" min="1" max="5">
+                        <span>二级权重:</span>
+                        <input type="number" id="subweight_人品基础_同理心与包容度" class="weight-input" value="0.3" step="0.01" min="0" max="1">
+                        <div class="explanation">1 分（自私、无法理解他人立场）-5 分（能换位思考、尊重差异，包容非原则性问题）</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 生活习惯契合度 -->
+            <div class="dimension-section">
+                <div class="primary-weight">
+                    <div class="form-group">
+                        <label>生活习惯契合度 (一级权重):</label>
+                        <input type="number" id="weight_生活习惯契合度" class="weight-input" value="0.25" step="0.01" min="0" max="1">
+                    </div>
+                </div>
+                <div class="sub-items">
+                    <div class="sub-item">
+                        <label>作息与健康管理 (1-5分):</label>
+                        <input type="number" id="score_生活习惯契合度_作息与健康管理" value="4" min="1" max="5">
+                        <span>二级权重:</span>
+                        <input type="number" id="subweight_生活习惯契合度_作息与健康管理" class="weight-input" value="0.3" step="0.01" min="0" max="1">
+                        <div class="explanation">1 分（昼夜颠倒、无视健康）-5 分（作息规律、注重饮食 / 运动，保持健康状态）</div>
+                    </div>
+                    <div class="sub-item">
+                        <label>卫生与整洁习惯 (1-5分):</label>
+                        <input type="number" id="score_生活习惯契合度_卫生与整洁习惯" value="3" min="1" max="5">
+                        <span>二级权重:</span>
+                        <input type="number" id="subweight_生活习惯契合度_卫生与整洁习惯" class="weight-input" value="0.2" step="0.01" min="0" max="1">
+                        <div class="explanation">1 分（极度邋遢、影响共同生活）-5 分（保持个人及环境整洁，能共同分担家务）</div>
+                    </div>
+                    <div class="sub-item">
+                        <label>消费观念 (1-5分):</label>
+                        <input type="number" id="score_生活习惯契合度_消费观念" value="4" min="1" max="5">
+                        <span>二级权重:</span>
+                        <input type="number" id="subweight_生活习惯契合度_消费观念" class="weight-input" value="0.3" step="0.01" min="0" max="1">
+                        <div class="explanation">1 分（过度挥霍或极度吝啬）-5 分（理性消费、与自身消费观匹配，能共同规划收支）</div>
+                    </div>
+                    <div class="sub-item">
+                        <label>性功能 (1-5分):</label>
+                        <input type="number" id="score_生活习惯契合度_性功能" value="5" min="1" max="5">
+                        <span>二级权重:</span>
+                        <input type="number" id="subweight_生活习惯契合度_性功能" class="weight-input" value="0.2" step="0.01" min="0" max="1">
+                        <div class="explanation">1分（和谐）-5 分（不和谐）</div>
+                    </div>
+                    <div class="sub-item">
+                        <label>是否抽烟 ("是"或"否"):</label>
+                        <input type="text" id="score_生活习惯契合度_是否抽烟" value="否">
+                        <div class="explanation">若 “是”，直接淘汰（总分记 0）；若 “否”，继续评分（此项不占分，但为前提条件）</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 道德水平 -->
+            <div class="dimension-section">
+                <div class="primary-weight">
+                    <div class="form-group">
+                        <label>道德水平 (一级权重):</label>
+                        <input type="number" id="weight_道德水平" class="weight-input" value="0.25" step="0.01" min="0" max="1">
+                    </div>
+                </div>
+                <div class="sub-items">
+                    <div class="sub-item">
+                        <label>诚信与原则性 (1-5分):</label>
+                        <input type="number" id="score_道德水平_诚信与原则性" value="5" min="1" max="5">
+                        <span>二级权重:</span>
+                        <input type="number" id="subweight_道德水平_诚信与原则性" class="weight-input" value="0.4" step="0.01" min="0" max="1">
+                        <div class="explanation">1 分（背信弃义、无底线）-5 分（信守承诺、有明确道德底线，不做损人利己之事）</div>
+                    </div>
+                    <div class="sub-item">
+                        <label>对他人的尊重（含性别平等） (1-5分):</label>
+                        <input type="number" id="score_道德水平_对他人的尊重（含性别平等）" value="4" min="1" max="5">
+                        <span>二级权重:</span>
+                        <input type="number" id="subweight_道德水平_对他人的尊重（含性别平等）" class="weight-input" value="0.4" step="0.01" min="0" max="1">
+                        <div class="explanation">1 分（歧视、不尊重他人人格）-5 分（尊重多元、平等待人，尤其尊重女性及弱势群体）</div>
+                    </div>
+                    <div class="sub-item">
+                        <label>社会责任感 (1-5分):</label>
+                        <input type="number" id="score_道德水平_社会责任感" value="4" min="1" max="5">
+                        <span>二级权重:</span>
+                        <input type="number" id="subweight_道德水平_社会责任感" class="weight-input" value="0.2" step="0.01" min="0" max="1">
+                        <div class="explanation">1 分（冷漠自私、无视公共利益）-5 分（有基本社会公德，愿意为公益或集体利益付出行动）</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button onclick="calculateScore()">计算评分</button>
+        <button class="reset-btn" onclick="resetToDefault()">重置为默认值</button>
+        
+        <div id="result" class="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        function calculateScore() {
+            try {
+                // 否决项检查
+                const isSmoking = document.getElementById('score_生活习惯契合度_是否抽烟').value;
+                if (isSmoking === '是') {
+                    showResult(0.0, '淘汰');
+                    return;
+                }
+                
+                // 获取权重配置
+                const weights = {};
+                const dimensions = ['家境适配度', '人品基础', '生活习惯契合度', '道德水平'];
+                
+                for (let dimension of dimensions) {
+                    const primaryWeight = parseFloat(document.getElementById(`weight_${dimension}`).value);
+                    weights[dimension] = {
+                        weight: primaryWeight,
+                        sub_weights: {}
+                    };
+                    
+                    // 获取子项权重
+                    const subItems = getSubItems(dimension);
+                    for (let item of subItems) {
+                        if (item !== '是否抽烟') {
+                            const subWeight = parseFloat(document.getElementById(`subweight_${dimension}_${item}`).value);
+                            weights[dimension].sub_weights[item] = subWeight;
+                        }
+                    }
+                }
+                
+                // 计算总分
+                let totalScore = 0.0;
+                
+                for (let dimension of dimensions) {
+                    let dimensionScore = 0.0;
+                    const primaryWeight = weights[dimension].weight;
+                    const subWeights = weights[dimension].sub_weights;
+                    
+                    const subItems = getSubItems(dimension);
+                    for (let item of subItems) {
+                        if (item !== '是否抽烟') {
+                            const itemScore = parseFloat(document.getElementById(`score_${dimension}_${item}`).value);
+                            const subWeight = subWeights[item];
+                            dimensionScore += itemScore * subWeight * primaryWeight;
+                        }
+                    }
+                    
+                    totalScore += dimensionScore;
+                }
+                
+                // 确定建议
+                let advice;
+                if (totalScore > 4.5) {
+                    advice = '优秀';
+                } else if (totalScore > 4) {
+                    advice = '良好';
+                } else if (totalScore > 3) {
+                    advice = '及格';
+                } else {
+                    advice = '淘汰';
+                }
+                
+                showResult(totalScore, advice);
+            } catch (error) {
+                alert('计算出错：' + error.message);
+            }
+        }
+        
+        function getSubItems(dimension) {
+            const mapping = {
+                '家境适配度': ['经济稳定性', '家庭氛围与家风', '对婚恋的支持度'],
+                '人品基础': ['责任心', '真诚度', '情绪稳定性', '同理心与包容度'],
+                '生活习惯契合度': ['作息与健康管理', '卫生与整洁习惯', '消费观念', '性功能', '是否抽烟'],
+                '道德水平': ['诚信与原则性', '对他人的尊重（含性别平等）', '社会责任感']
+            };
+            return mapping[dimension] || [];
+        }
+        
+        function showResult(score, advice) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            let className = '';
+            switch(advice) {
+                case '优秀':
+                    className = 'excellent';
+                    break;
+                case '良好':
+                    className = 'good';
+                    break;
+                case '及格':
+                    className = 'pass';
+                    break;
+                default:
+                    className = 'reject';
+            }
+            
+            resultDiv.className = 'result ' + className;
+            resultDiv.innerHTML = `
+                <div class="score-display">总分: ${score.toFixed(2)}</div>
+                <div>建议: ${advice}</div>
+            `;
+        }
+        
+        function resetToDefault() {
+            // 重置权重
+            document.getElementById('weight_家境适配度').value = '0.2';
+            document.getElementById('weight_人品基础').value = '0.3';
+            document.getElementById('weight_生活习惯契合度').value = '0.25';
+            document.getElementById('weight_道德水平').value = '0.25';
+            
+            // 重置子项权重
+            document.getElementById('subweight_家境适配度_经济稳定性').value = '0.6';
+            document.getElementById('subweight_家境适配度_家庭氛围与家风').value = '0.3';
+            document.getElementById('subweight_家境适配度_对婚恋的支持度').value = '0.1';
+            
+            document.getElementById('subweight_人品基础_责任心').value = '0.2';
+            document.getElementById('subweight_人品基础_真诚度').value = '0.15';
+            document.getElementById('subweight_人品基础_情绪稳定性').value = '0.35';
+            document.getElementById('subweight_人品基础_同理心与包容度').value = '0.3';
+            
+            document.getElementById('subweight_生活习惯契合度_作息与健康管理').value = '0.3';
+            document.getElementById('subweight_生活习惯契合度_卫生与整洁习惯').value = '0.2';
+            document.getElementById('subweight_生活习惯契合度_消费观念').value = '0.3';
+            document.getElementById('subweight_生活习惯契合度_性功能').value = '0.2';
+            
+            document.getElementById('subweight_道德水平_诚信与原则性').value = '0.4';
+            document.getElementById('subweight_道德水平_对他人的尊重（含性别平等）').value = '0.4';
+            document.getElementById('subweight_道德水平_社会责任感').value = '0.2';
+            
+            // 重置评分
+            document.getElementById('score_家境适配度_经济稳定性').value = '4';
+            document.getElementById('score_家境适配度_家庭氛围与家风').value = '3';
+            document.getElementById('score_家境适配度_对婚恋的支持度').value = '5';
+            
+            document.getElementById('score_人品基础_责任心').value = '5';
+            document.getElementById('score_人品基础_真诚度').value = '4';
+            document.getElementById('score_人品基础_情绪稳定性').value = '3';
+            document.getElementById('score_人品基础_同理心与包容度').value = '4';
+            
+            document.getElementById('score_生活习惯契合度_作息与健康管理').value = '4';
+            document.getElementById('score_生活习惯契合度_卫生与整洁习惯').value = '3';
+            document.getElementById('score_生活习惯契合度_消费观念').value = '4';
+            document.getElementById('score_生活习惯契合度_性功能').value = '5';
+            document.getElementById('score_生活习惯契合度_是否抽烟').value = '否';
+            
+            document.getElementById('score_道德水平_诚信与原则性').value = '5';
+            document.getElementById('score_道德水平_对他人的尊重（含性别平等）').value = '4';
+            document.getElementById('score_道德水平_社会责任感').value = '4';
+            
+            // 隐藏结果
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+```
